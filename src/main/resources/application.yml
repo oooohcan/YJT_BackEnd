@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: YJT_BackEnd
+  # DataSource Config
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yjt_database?characterEncoding=utf-8&serverTimezone=UTC&&useSSL=false
+    username: root
+    password: '0789'
+
+  mybatis-plus:
+    configuration:
+      map-underscore-to-camel-case: false
