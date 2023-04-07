@@ -1,4 +1,5 @@
 package edu.web.yjt_backend.service;
+
 import java.util.Date;
 
 import edu.web.yjt_backend.model.domain.User;
@@ -10,12 +11,14 @@ import org.springframework.util.DigestUtils;
 import javax.annotation.Resource;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 public class UserServiceTest {
-    @Resource UserService userService;
+    @Resource
+    UserService userService;
 
     @Test
-    public void testAddUser(){
+    public void testAddUser() {
         User user = new User();
         user.setUsername("testnie");
         user.setUserAccount("100001");
@@ -28,10 +31,11 @@ public class UserServiceTest {
         System.out.println(user.getId());
         Assertions.assertTrue(result);
     }
+
     @Test
-    void testDigest(){
+    void testDigest() {
         final String SALT = "Abc123@#";
-        String encryptPassword = DigestUtils.md5DigestAsHex((SALT+"myPassword").getBytes());
+        String encryptPassword = DigestUtils.md5DigestAsHex((SALT + "myPassword").getBytes());
         System.out.println(encryptPassword);
     }
 
@@ -41,51 +45,51 @@ public class UserServiceTest {
         String userAccount = "test1";
         String userPassword = "";
         String checkPassword = "12345678";
-        String inviteCode="x123";
-        long result = userService.userRegister(userAccount, userPassword, checkPassword,inviteCode);
+        String inviteCode = "x123";
+        long result = userService.userRegister(userAccount, userPassword, checkPassword, inviteCode);
         Assertions.assertEquals(-1, result);
 
         userAccount = "ha";
-        result = userService.userRegister(userAccount, userPassword, checkPassword,inviteCode);
+        result = userService.userRegister(userAccount, userPassword, checkPassword, inviteCode);
         Assertions.assertEquals(-1, result);
 
         userPassword = "123456";
-        result = userService.userRegister(userAccount, userPassword, checkPassword,inviteCode);
+        result = userService.userRegister(userAccount, userPassword, checkPassword, inviteCode);
         Assertions.assertEquals(-1, result);
 
         userAccount = "ha ha";
         userPassword = "12345678";
         //空格未过滤
-        result = userService.userRegister(userAccount, userPassword, checkPassword,inviteCode);
+        result = userService.userRegister(userAccount, userPassword, checkPassword, inviteCode);
         Assertions.assertEquals(-1, result);
 
         checkPassword = "123456789";
-        result = userService.userRegister(userAccount, userPassword, checkPassword,inviteCode);
+        result = userService.userRegister(userAccount, userPassword, checkPassword, inviteCode);
         Assertions.assertEquals(-1, result);
 
         userAccount = "hahaha";
         checkPassword = "12345678";
-        result = userService.userRegister(userAccount, userPassword, checkPassword,inviteCode);
+        result = userService.userRegister(userAccount, userPassword, checkPassword, inviteCode);
         Assertions.assertEquals(-1, result);
 
         userAccount = "wdnmd";
-        result = userService.userRegister(userAccount, userPassword, checkPassword,inviteCode);
+        result = userService.userRegister(userAccount, userPassword, checkPassword, inviteCode);
         Assertions.assertEquals(-1, result);
 //        Assertions.assertTrue(result > 0);
     }
 
     @Test
-    void userRegisterInviteTest(){
+    void userRegisterInviteTest() {
         String userAccount = "test1";
         String userPassword = "12345678";
         String checkPassword = "12345678";
         String inviteCode = "hhhh";
-        long result = userService.userRegister(userAccount, userPassword, checkPassword,inviteCode);
-        Assertions.assertEquals(-1,result);
+        long result = userService.userRegister(userAccount, userPassword, checkPassword, inviteCode);
+        Assertions.assertEquals(-1, result);
 
         inviteCode = "ha002";
-        result = userService.userRegister(userAccount, userPassword, checkPassword,inviteCode);
-        Assertions.assertEquals(-1,result);
+        result = userService.userRegister(userAccount, userPassword, checkPassword, inviteCode);
+        Assertions.assertEquals(-1, result);
 //        Assertions.assertTrue(result > 0);
     }
 }

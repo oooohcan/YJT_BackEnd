@@ -1,6 +1,6 @@
 package edu.web.yjt_backend.constant;
 
-public interface UserConstant{
+public interface UserConstant {
     /**
      * 用户登录态键
      */
@@ -19,5 +19,5 @@ public interface UserConstant{
     /**
      * 邀请码，用于校验用户注册
      */
-    String [] INVITE_CODE_LIST = {"x123","ha002","p15d","n3cc"};
+    String[] INVITE_CODE_LIST = {"x123", "ha002", "p15d", "n3cc"};
 }

@@ -17,13 +17,16 @@ public class BaseRespone<T> implements Serializable {
         this.message = message;
         this.description = description;
     }
+
     public BaseRespone(int code, T data, String message) {
-        this(code,data,message,"");
+        this(code, data, message, "");
     }
+
     public BaseRespone(int code, T data) {
-        this(code,data,"","");
+        this(code, data, "", "");
     }
-    public BaseRespone(ErrorCode errorCode){
-        this(errorCode.getCode(),null, errorCode.getMessage(),errorCode.getDescription());
+
+    public BaseRespone(ErrorCode errorCode) {
+        this(errorCode.getCode(), null, errorCode.getMessage(), errorCode.getDescription());
     }
 }

@@ -4,17 +4,19 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import lombok.Data;
 
 /**
  * 用户
+ *
  * @TableName user
  */
-@TableName(value ="user")
+@TableName(value = "user")
 @Data
 public class User implements Serializable {
     /**
-     * 
+     *
      */
     @TableId(type = IdType.AUTO)
     private Long id;
@@ -85,7 +87,6 @@ public class User implements Serializable {
      */
     private String inviteCode;
 
-    
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
