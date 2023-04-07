@@ -1,9 +1,10 @@
-package edu.web.yjt_backend;
+package edu.web.yjt_backend.exception;
 
+import edu.web.yjt_backend.common.BaseRespone;
+import edu.web.yjt_backend.common.ErrorCode;
+import edu.web.yjt_backend.common.ResultUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.oooohcan.userback.common.BaseRespone;
-import org.oooohcan.userback.common.ErrorCode;
-import org.oooohcan.userback.common.ResultUtils;
+
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -21,7 +22,7 @@ public class GlobalExceptionHandler{
 
     //捕获全局系统异常，然后自定义状态信息，过滤后端关键信息
     @ExceptionHandler(RuntimeException.class)
-    public Baserespone runtimeException(RuntimeException e){
+    public BaseRespone runtimeException(RuntimeException e){
         log.error("runtimeException",e);
         return ResultUtils.error(ErrorCode.SYSTEM_ERROR,e.getMessage(),"");
     }

@@ -1,4 +1,4 @@
-package edu.web.yjt_backend;
+package edu.web.yjt_backend.model.domain.request;
 
 import lombok.Data;
 

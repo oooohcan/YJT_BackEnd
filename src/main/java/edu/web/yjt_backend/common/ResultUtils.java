@@ -1,4 +1,4 @@
-package edu.web.yjt_backend;
+package edu.web.yjt_backend.common;
 
 public class ResultUtils{
     /**
@@ -22,7 +22,7 @@ public class ResultUtils{
      * @param description
      * @return
      */
-    public static BaseRespone error(ErrorCode errorCode, String description) {return new BaseRespone<>(errorCode.getcode(),null,errorCode.getMessage(),description);}
+    public static BaseRespone error(ErrorCode errorCode, String description) {return new BaseRespone<>(errorCode.getCode(),null,errorCode.getMessage(),description);}
 
     /**
      * 失败
@@ -31,7 +31,7 @@ public class ResultUtils{
      * @param description
      * @return
      */
-    public static BaseRespone error(ErrorCode errorCode, String message, String description) {return new BaseRespone<>(errorCode.getcode(),null,message,description);}
+    public static BaseRespone error(ErrorCode errorCode, String message, String description) {return new BaseRespone<>(errorCode.getCode(),null,message,description);}
 
     /**
      * 失败
