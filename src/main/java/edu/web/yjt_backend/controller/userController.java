@@ -71,7 +71,7 @@ public class userController{
             throw new BusinessException(ErrorCode.NOT_LOGIN,"用户未登录");
         }
         long userId = currentUser.getId();
-        //todo 校验用户是否合法
+        //校验用户是否合法
         User user = userService.getById(userId);
         User safetyUser = userService.getSafetyUser(user);
         return ResultUtils.success(safetyUser);
