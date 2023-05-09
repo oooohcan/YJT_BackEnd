@@ -23,7 +23,7 @@ import static edu.web.yjt_backend.constant.UserConstant.USER_LOGIN_STATE;
 @RestController
 @RequestMapping("/user")
 //下面这个允许跨域的前端ip需要具体改
-@CrossOrigin(origins = {"http://47.115.230.131"}, allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:8000"}, allowCredentials = "true")
 public class userController {
     @Resource
     private UserService userService;
