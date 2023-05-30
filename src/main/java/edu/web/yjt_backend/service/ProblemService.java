@@ -13,6 +13,7 @@ import java.util.List;
 */
 public interface ProblemService extends IService<Problem> {
     List<Problem> getProblem();
+    List<Problem> pageProblem(int current,int pageSize);
     long addProblem(String title,String author,String content,String answer,int label);
     boolean deleteProblem(long id,HttpServletRequest request);
 }

@@ -29,10 +29,14 @@ public class ProblemServiceImpl extends ServiceImpl<ProblemMapper, Problem>
     private ProblemMapper problemMapper;
     @Override
     public List<Problem> getProblem() {
-        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
-        queryWrapper.last("LIMIT 10");
-        Page<Problem> page = new Page<>(1,10);
-        return problemMapper.selectPage(page,queryWrapper).getRecords();
+        return this.list();
+    }
+
+    @Override
+    public List<Problem> pageProblem(int current,int pageSize){
+        Page<Problem> page = new Page<>(current,pageSize);
+        Page<Problem> result = this.page(page);
+        return result.getRecords();
     }
 
     @Override
@@ -50,7 +54,7 @@ public class ProblemServiceImpl extends ServiceImpl<ProblemMapper, Problem>
         if(answer.length()>600){
             throw new BusinessException(ErrorCode.PARAMS_ERROR,"答案长度大于600");
         }
-        //2、插入书库
+        //2、插入题目到数据库
         Problem problem = new Problem();
         problem.setTitle(title);
         problem.setAuthor(author);

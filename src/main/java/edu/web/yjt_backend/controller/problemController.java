@@ -6,6 +6,7 @@ import edu.web.yjt_backend.common.ResultUtils;
 import edu.web.yjt_backend.exception.BusinessException;
 import edu.web.yjt_backend.model.domain.Problem;
 import edu.web.yjt_backend.model.domain.request.AddProblemRequest;
+import edu.web.yjt_backend.model.domain.request.PageProblemRequest;
 import edu.web.yjt_backend.service.ProblemService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,15 @@ public class problemController {
             throw new BusinessException(ErrorCode.NULL_ERROR,"获取问题的请求为空");
         }
         List<Problem> problemList = problemService.getProblem();
+        return ResultUtils.success(problemList);
+    }
+
+    @PostMapping("/pageProblem")
+    public BaseRespone<List<Problem>> pageProblem(@RequestBody PageProblemRequest pageProblemRequest, HttpServletRequest request){
+        if(request == null){
+            throw new BusinessException(ErrorCode.NULL_ERROR,"获取问题的请求为空");
+        }
+        List<Problem> problemList = problemService.pageProblem(pageProblemRequest.getCurrent(),pageProblemRequest.getPageSize());
         return ResultUtils.success(problemList);
     }
 
