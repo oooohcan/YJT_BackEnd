@@ -13,5 +13,12 @@ import java.util.List;
  */
 public interface PaperService extends IService<Paper> {
     List<Paper> getPaper();
+
     List<Problem> paperProblem(long id);
+
+    Long addPaper(String name, long author, String des, byte isPub, List<Long> ques);
+
+    boolean delPaper(long pid, long uid);
+
+    List<Paper> pagePaper(int current,int pageSize);
 }

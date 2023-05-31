@@ -76,7 +76,6 @@ public class ProblemServiceImpl extends ServiceImpl<ProblemMapper, Problem>
         }
         return this.removeById(id);
     }
-
 }
 
 

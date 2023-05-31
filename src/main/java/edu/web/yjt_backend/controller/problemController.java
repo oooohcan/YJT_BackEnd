@@ -64,6 +64,4 @@ public class problemController {
         Boolean result = problemService.deleteProblem(id, request);
         return ResultUtils.success(result);
     }
-
-
 }

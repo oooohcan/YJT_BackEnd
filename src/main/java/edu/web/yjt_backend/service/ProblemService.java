@@ -16,5 +16,4 @@ public interface ProblemService extends IService<Problem> {
     List<Problem> pageProblem(int current,int pageSize);
     long addProblem(String title,String author,String content,String answer,int label);
     boolean deleteProblem(long id,HttpServletRequest request);
-//    Problem getProblemById(long id);
 }
