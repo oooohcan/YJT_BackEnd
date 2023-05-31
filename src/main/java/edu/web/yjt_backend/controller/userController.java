@@ -87,9 +87,23 @@ public class userController {
         return ResultUtils.success(userList);
     }
 
+
     @GetMapping("/delete")
     public BaseRespone<Boolean> userDelete(@RequestBody long id, HttpServletRequest request) {
         Boolean result = userService.deleteUser(id, request);
         return ResultUtils.success(result);
+    }
+
+    @PostMapping("/getAllUser")
+    public BaseRespone<List<User>> getAllUser(HttpServletRequest request) {
+        Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
+        User currentUser = (User) userObj;
+        if (currentUser == null) {
+            throw new BusinessException(ErrorCode.NOT_LOGIN, "用户未登录");
+        }
+        if(!userService.isAdmin(request)){
+            throw new BusinessException(ErrorCode.NO_AUTH, "非管理员用户无权查看其他用户的信息");
+        }
+        return ResultUtils.success(userService.getAllUser());
     }
 }

@@ -24,47 +24,44 @@ public class problemController {
     private ProblemService problemService;
 
     @GetMapping("/getProblem")
-    public BaseRespone<List<Problem>> getProblem(HttpServletRequest request){
-        if(request == null){
-            throw new BusinessException(ErrorCode.NULL_ERROR,"获取问题的请求为空");
+    public BaseRespone<List<Problem>> getProblem(HttpServletRequest request) {
+        if (request == null) {
+            throw new BusinessException(ErrorCode.NULL_ERROR, "获取问题的请求为空");
         }
         List<Problem> problemList = problemService.getProblem();
         return ResultUtils.success(problemList);
     }
 
     @PostMapping("/pageProblem")
-    public BaseRespone<List<Problem>> pageProblem(@RequestBody PageProblemRequest pageProblemRequest, HttpServletRequest request){
-        if(request == null){
-            throw new BusinessException(ErrorCode.NULL_ERROR,"获取问题的请求为空");
+    public BaseRespone<List<Problem>> pageProblem(@RequestBody PageProblemRequest pageProblemRequest, HttpServletRequest request) {
+        if (request == null) {
+            throw new BusinessException(ErrorCode.NULL_ERROR, "获取问题的请求为空");
         }
-        List<Problem> problemList = problemService.pageProblem(pageProblemRequest.getCurrent(),pageProblemRequest.getPageSize());
+        List<Problem> problemList = problemService.pageProblem(pageProblemRequest.getCurrent(), pageProblemRequest.getPageSize());
         return ResultUtils.success(problemList);
     }
 
     @GetMapping("/addProblem")
-    public BaseRespone<Long> addProblem(@RequestBody AddProblemRequest addProblemRequest){
-        if(addProblemRequest == null){
-            return ResultUtils.error(ErrorCode.NULL_ERROR,"增加试卷请求为空");
+    public BaseRespone<Long> addProblem(@RequestBody AddProblemRequest addProblemRequest) {
+        if (addProblemRequest == null) {
+            return ResultUtils.error(ErrorCode.NULL_ERROR, "增加试卷请求为空");
         }
         String title = addProblemRequest.getTitle();
         String author = addProblemRequest.getAuthor();
         String content = addProblemRequest.getContent();
         String answer = addProblemRequest.getAnswer();
         int label = addProblemRequest.getLabel();
-        if(StringUtils.isAnyBlank(author,title,content,answer)){
-            throw new BusinessException(ErrorCode.PARAMS_ERROR,"信息填入不全");
+        if (StringUtils.isAnyBlank(author, title, content, answer)) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "信息填入不全");
         }
-        Long result = problemService.addProblem(title,author,content,answer,label);
+        Long result = problemService.addProblem(title, author, content, answer, label);
         return ResultUtils.success(result);
     }
 
 
     @GetMapping("/deleteProblem")
-    public BaseRespone<Boolean> deleteProblem(@RequestBody long id,HttpServletRequest request){
-        Boolean result = problemService.deleteProblem(id,request);
+    public BaseRespone<Boolean> deleteProblem(@RequestBody long id, HttpServletRequest request) {
+        Boolean result = problemService.deleteProblem(id, request);
         return ResultUtils.success(result);
     }
-
-
-
 }

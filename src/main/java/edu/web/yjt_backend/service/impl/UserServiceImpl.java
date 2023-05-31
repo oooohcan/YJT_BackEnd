@@ -180,6 +180,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         User user = (User) userObj;
         return user != null && user.getUserRole() == ADMIN_ROLE;
     }
+
+    @Override
+    public List<User> getAllUser() {
+        List<User> users = this.list();
+        return users.stream().map(this::getSafetyUser).collect(Collectors.toList());
+    }
 }
 
 
