@@ -87,9 +87,16 @@ public class userController {
         return ResultUtils.success(userList);
     }
 
+
     @GetMapping("/delete")
     public BaseRespone<Boolean> userDelete(@RequestBody long id, HttpServletRequest request) {
         Boolean result = userService.deleteUser(id, request);
         return ResultUtils.success(result);
     }
+
+//    @GetMapping("/delete")
+//    public BaseRespone<Boolean> userDelete(long id, HttpServletRequest request) {
+//        Boolean result = userService.deleteUser(id, request);
+//        return ResultUtils.success(result);
+//    }
 }
