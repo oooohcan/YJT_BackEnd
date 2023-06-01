@@ -5,7 +5,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/yjt_database?characterEncoding=utf-8&serverTimezone=UTC&&useSSL=false
-    username: yjt
+    username: root
     password: '0789'
   #session失效时间
   session:

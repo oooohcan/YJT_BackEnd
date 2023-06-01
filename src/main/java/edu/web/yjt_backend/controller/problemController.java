@@ -6,6 +6,7 @@ import edu.web.yjt_backend.common.ResultUtils;
 import edu.web.yjt_backend.exception.BusinessException;
 import edu.web.yjt_backend.model.domain.Problem;
 import edu.web.yjt_backend.model.domain.request.AddProblemRequest;
+import edu.web.yjt_backend.model.domain.request.GetProblemRequest;
 import edu.web.yjt_backend.model.domain.request.PageProblemRequest;
 import edu.web.yjt_backend.service.ProblemService;
 import org.apache.commons.lang3.StringUtils;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/problem")
@@ -29,6 +31,24 @@ public class problemController {
             throw new BusinessException(ErrorCode.NULL_ERROR, "获取问题的请求为空");
         }
         List<Problem> problemList = problemService.getProblem();
+        return ResultUtils.success(problemList);
+    }
+
+    @PostMapping("/searchProblem")
+    public BaseRespone<List<Problem>> searchProblem(@RequestParam Optional<Integer> id, @RequestParam Optional<String> title, HttpServletRequest request) {
+        if (request == null) {
+            throw new BusinessException(ErrorCode.NULL_ERROR, "获取问题的请求为空");
+        }
+        List<Problem> problemList;
+        if(id.isPresent() && title.isPresent()){
+             problemList = problemService.searchProblem(id.get(),title.get());
+        } else if (id.isPresent()) {
+            problemList = problemService.searchProblem(id.get(),null);
+        } else if (title.isPresent()) {
+            problemList = problemService.searchProblem(null,title.get());
+        }else{
+            problemList = problemService.searchProblem(null,null);
+        }
         return ResultUtils.success(problemList);
     }
 

@@ -22,7 +22,13 @@ public class ProblemServiceTest {
 
     @Test
     public void getProblem(){
-            List<Problem> problemList = problemService.getProblem();
+        List<Problem> problemList = problemService.getProblem();
+        System.out.println(problemList);
+    }
+
+    @Test
+    public void searchProblem(){
+            List<Problem> problemList = problemService.searchProblem(1,"s");
             System.out.println(problemList);
     }
 

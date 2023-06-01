@@ -1,10 +1,12 @@
 package edu.web.yjt_backend.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import edu.web.yjt_backend.common.ErrorCode;
 import edu.web.yjt_backend.exception.BusinessException;
+import edu.web.yjt_backend.model.domain.User;
 import edu.web.yjt_backend.service.ProblemService;
 import edu.web.yjt_backend.model.domain.Problem;
 import edu.web.yjt_backend.mapper.ProblemMapper;
@@ -27,10 +29,26 @@ public class ProblemServiceImpl extends ServiceImpl<ProblemMapper, Problem>
         implements ProblemService {
     @Resource
     private ProblemMapper problemMapper;
-
     @Override
-    public List<Problem> getProblem() {
+    public List<Problem> getProblem(){
         return this.list();
+    }
+    @Override
+    public List<Problem> searchProblem(Integer id, String title) {
+        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
+        if (id != null && title != null) {
+            queryWrapper.eq("id", id).like("title", title);
+        }
+        else if (id == null && title != null) {
+            queryWrapper.like("title", title);
+        }
+        else if (id != null && title == null) {
+            queryWrapper.eq("id", id);
+        }
+        else {
+            return this.list(queryWrapper);
+        }
+        return this.list(queryWrapper);
     }
 
     @Override
