@@ -20,5 +20,7 @@ public interface PaperService extends IService<Paper> {
 
     boolean delPaper(long pid, long uid);
 
-    List<Paper> pagePaper(int current,int pageSize);
+    List<Paper> pagePaper(int current, int pageSize);
+
+    List<Paper> searchPaper(Integer id, String name);
 }
