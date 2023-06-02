@@ -40,14 +40,14 @@ public class problemController {
             throw new BusinessException(ErrorCode.NULL_ERROR, "获取问题的请求为空");
         }
         List<Problem> problemList;
-        if(id.isPresent() && title.isPresent()){
-             problemList = problemService.searchProblem(id.get(),title.get());
+        if (id.isPresent() && title.isPresent()) {
+            problemList = problemService.searchProblem(id.get(), title.get());
         } else if (id.isPresent()) {
-            problemList = problemService.searchProblem(id.get(),null);
+            problemList = problemService.searchProblem(id.get(), null);
         } else if (title.isPresent()) {
-            problemList = problemService.searchProblem(null,title.get());
-        }else{
-            problemList = problemService.searchProblem(null,null);
+            problemList = problemService.searchProblem(null, title.get());
+        } else {
+            problemList = problemService.searchProblem(null, null);
         }
         return ResultUtils.success(problemList);
     }
