@@ -101,7 +101,7 @@ public class userController {
         if (currentUser == null) {
             throw new BusinessException(ErrorCode.NOT_LOGIN, "用户未登录");
         }
-        if(!userService.isAdmin(request)){
+        if (!userService.isAdmin(request)) {
             throw new BusinessException(ErrorCode.NO_AUTH, "非管理员用户无权查看其他用户的信息");
         }
         return ResultUtils.success(userService.getAllUser());

@@ -29,23 +29,22 @@ public class ProblemServiceImpl extends ServiceImpl<ProblemMapper, Problem>
         implements ProblemService {
     @Resource
     private ProblemMapper problemMapper;
+
     @Override
-    public List<Problem> getProblem(){
+    public List<Problem> getProblem() {
         return this.list();
     }
+
     @Override
     public List<Problem> searchProblem(Integer id, String title) {
         QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
         if (id != null && title != null) {
             queryWrapper.eq("id", id).like("title", title);
-        }
-        else if (id == null && title != null) {
+        } else if (id == null && title != null) {
             queryWrapper.like("title", title);
-        }
-        else if (id != null && title == null) {
+        } else if (id != null) {
             queryWrapper.eq("id", id);
-        }
-        else {
+        } else {
             return this.list(queryWrapper);
         }
         return this.list(queryWrapper);

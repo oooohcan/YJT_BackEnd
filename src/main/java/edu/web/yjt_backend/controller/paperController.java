@@ -11,6 +11,7 @@ import edu.web.yjt_backend.model.domain.request.AddPaperRequest;
 import edu.web.yjt_backend.model.domain.request.DelPaperRequest;
 import edu.web.yjt_backend.model.domain.request.PagePaperRequest;
 import edu.web.yjt_backend.model.domain.request.PaperProblemRequest;
+import edu.web.yjt_backend.model.domain.response.PagePaperResponse;
 import edu.web.yjt_backend.service.PaperService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
 
 import static edu.web.yjt_backend.constant.UserConstant.USER_LOGIN_STATE;
 
@@ -87,11 +89,21 @@ public class paperController {
     }
 
     @PostMapping("/pagePaper")
-    public BaseRespone<List<Paper>> pagePaper(@RequestBody PagePaperRequest pagePaperRequest, HttpServletRequest request) {
+    public BaseRespone<PagePaperResponse> pagePaper(@RequestBody PagePaperRequest pagePaperRequest, HttpServletRequest request) {
         if (pagePaperRequest == null) {
             return ResultUtils.error(ErrorCode.NULL_ERROR, "请求为空");
         }
         List<Paper> result = paperService.pagePaper(pagePaperRequest.getCurrent(), pagePaperRequest.getPageSize());
-        return ResultUtils.success(result);
+        long size = paperService.count();
+        return ResultUtils.success(new PagePaperResponse(result, size));
+    }
+
+    @PostMapping("/searchPaper")
+    public BaseRespone<List<Paper>> searchPaper(@RequestParam Optional<Integer> id, @RequestParam Optional<String> name, HttpServletRequest request) {
+        if (request == null) {
+            throw new BusinessException(ErrorCode.NULL_ERROR, "获取问题的请求为空");
+        }
+        List<Paper> problemList = paperService.searchPaper(id.orElse(null), name.orElse(null));
+        return ResultUtils.success(problemList);
     }
 }

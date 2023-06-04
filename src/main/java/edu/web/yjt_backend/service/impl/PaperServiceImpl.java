@@ -1,5 +1,6 @@
 package edu.web.yjt_backend.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import edu.web.yjt_backend.common.ErrorCode;
@@ -86,10 +87,22 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper>
     }
 
     @Override
-    public List<Paper> pagePaper(int current,int size){
-        Page<Paper> page = new Page<>(current,size);
+    public List<Paper> pagePaper(int current, int size) {
+        Page<Paper> page = new Page<>(current, size);
         Page<Paper> result = this.page(page);
         return result.getRecords();
+    }
+
+    @Override
+    public List<Paper> searchPaper(Integer id, String name) {
+        QueryWrapper<Paper> queryWrapper = new QueryWrapper<>();
+        if (id != null) {
+            queryWrapper.eq("id", id);
+        }
+        if (!name.isEmpty()) {
+            queryWrapper.like("name", name);
+        }
+        return this.list(queryWrapper);
     }
 }
 
