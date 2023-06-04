@@ -8,6 +8,8 @@ import edu.web.yjt_backend.model.domain.Problem;
 import edu.web.yjt_backend.model.domain.request.AddProblemRequest;
 import edu.web.yjt_backend.model.domain.request.GetProblemRequest;
 import edu.web.yjt_backend.model.domain.request.PageProblemRequest;
+import edu.web.yjt_backend.model.domain.response.PagePaperResponse;
+import edu.web.yjt_backend.model.domain.response.PageProblemResponse;
 import edu.web.yjt_backend.service.ProblemService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -53,12 +55,13 @@ public class problemController {
     }
 
     @PostMapping("/pageProblem")
-    public BaseRespone<List<Problem>> pageProblem(@RequestBody PageProblemRequest pageProblemRequest, HttpServletRequest request) {
+    public BaseRespone<PageProblemResponse> pageProblem(@RequestBody PageProblemRequest pageProblemRequest, HttpServletRequest request) {
         if (request == null) {
             throw new BusinessException(ErrorCode.NULL_ERROR, "获取问题的请求为空");
         }
         List<Problem> problemList = problemService.pageProblem(pageProblemRequest.getCurrent(), pageProblemRequest.getPageSize());
-        return ResultUtils.success(problemList);
+        long total = problemService.count();
+        return ResultUtils.success(new PageProblemResponse(problemList, total));
     }
 
     @PostMapping("/addProblem")
