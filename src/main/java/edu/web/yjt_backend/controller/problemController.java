@@ -61,7 +61,7 @@ public class problemController {
         return ResultUtils.success(problemList);
     }
 
-    @GetMapping("/addProblem")
+    @PostMapping("/addProblem")
     public BaseRespone<Long> addProblem(@RequestBody AddProblemRequest addProblemRequest) {
         if (addProblemRequest == null) {
             return ResultUtils.error(ErrorCode.NULL_ERROR, "增加试卷请求为空");
@@ -79,7 +79,7 @@ public class problemController {
     }
 
 
-    @GetMapping("/deleteProblem")
+    @PostMapping("/deleteProblem")
     public BaseRespone<Boolean> deleteProblem(@RequestBody long id, HttpServletRequest request) {
         Boolean result = problemService.deleteProblem(id, request);
         return ResultUtils.success(result);

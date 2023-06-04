@@ -81,14 +81,14 @@ public class userController {
         return ResultUtils.success(safetyUser);
     }
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     public BaseRespone<List<User>> userSearch(String username, HttpServletRequest request) {
         List<User> userList = userService.searchUser(username, request);
         return ResultUtils.success(userList);
     }
 
 
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     public BaseRespone<Boolean> userDelete(@RequestBody long id, HttpServletRequest request) {
         Boolean result = userService.deleteUser(id, request);
         return ResultUtils.success(result);
