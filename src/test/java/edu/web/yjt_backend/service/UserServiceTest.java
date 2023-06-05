@@ -16,8 +16,8 @@ public class UserServiceTest {
     @Test
     public void testAddUser() {
         User user = new User();
-        user.setUsername("testnie");
-        user.setUserAccount("100001");
+        user.setUsername("testhhh");
+        user.setUserAccount("testhhh");
         user.setAvatarUrl("https://img.ddtouxiang.com/upload/touxiang/20230217/0217014009152717.jpg_preview.jpg");
         user.setGender(0);
         user.setUserPassword("12345678");
@@ -76,7 +76,7 @@ public class UserServiceTest {
 
     @Test
     void userRegisterInviteTest() {
-        String userAccount = "test1";
+        String userAccount = "test2";
         String userPassword = "12345678";
         String checkPassword = "12345678";
         String inviteCode = "hhhh";

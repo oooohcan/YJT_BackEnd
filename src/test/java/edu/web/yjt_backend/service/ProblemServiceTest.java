@@ -34,7 +34,7 @@ public class ProblemServiceTest {
 
     @Test
     void addProblem(){
-        long result =  problemService.addProblem("加题目测试","admin","内容要你猜","答案自在人心",0);
+        long result =  problemService.addProblem("加题目测试2","admin","内容要你猜","答案自在人心",0);
         Assertions.assertEquals(1,result);
     }
 
